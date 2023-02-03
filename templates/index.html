@@ -1,0 +1,29 @@
+{% include "header.html" %}
+
+<section class="main">
+    <div class="container">
+        <div class="card-columns">
+            {% for cafe in cafes %}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{cafe.img_url}}" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{cafe.name}}</h5>
+                    <p class="card-text">{{cafe.description|safe}}</p>
+                    <p class="card-text">{{cafe.rating}}</p>
+                    {% if current_user.rol == 1 or current_user.id == cafe.author.id%}
+                    <a class='btn' href="{{url_for('delete', card_id=cafe.id)}}">Delete</a>
+                    <a class='btn' href="{{url_for('edit', card_id=cafe.id)}}">Edit</a>
+                    {% endif %}
+                    <a class='btn' href="{{cafe.location}}">Location</a>
+                    <div class="card-footer text-muted">
+                        Posted by: {{cafe.author.name}}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+{% include "footer.html" %}

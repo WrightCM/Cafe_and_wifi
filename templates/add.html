@@ -1,0 +1,16 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+<section class="forms main">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages%}
+    <p class="help-block">{{message}} </p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {{ ckeditor.load() }}
+    {{wtf.quick_form(form, novalidate=True)}}
+</section>
+
+{% include "footer.html" %}
